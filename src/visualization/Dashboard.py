@@ -22,7 +22,7 @@ tab_dashboard, tab_chatbot = st.tabs([" Dashboard", "Chatbot"])
 
 with tab_dashboard:
 
-    st.write(df.columns.tolist())
+    
 
     # =========================
     # Métricas principales
