@@ -3,7 +3,7 @@ import streamlit as st
 
 st.title("Edu AI Risk Dashboard")
 
-df = pd.read_csv("data/raw/student-mat.csv")
+df = pd.read_csv("data/raw/student-mat.csv", sep=";")
 
 st.write("Vista previa de los datos")
 st.dataframe(df.head())
