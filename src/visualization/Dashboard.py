@@ -22,6 +22,8 @@ tab_dashboard, tab_chatbot = st.tabs([" Dashboard", "Chatbot"])
 
 with tab_dashboard:
 
+    st.write(df.columns.tolist())
+
     # =========================
     # Métricas principales
     # =========================
@@ -95,6 +97,25 @@ with tab_dashboard:
     # =========================
 
     col1, col2 = st.columns(2)
+    
+
+    with col1:
+        st.subheader("Reprobados por número de fracasos previos")
+
+        df["failures_group"] = df["failures"].apply(
+            lambda x: "3+ fracasos" if x >= 3 else f"{x} fracasos"
+        )
+
+        failures_resultado = pd.crosstab(
+            df["failures_group"],
+            df["resultado"]
+        )
+
+        failures_resultado = failures_resultado.reindex(
+            ["0 fracasos", "1 fracasos", "2 fracasos", "3+ fracasos"]
+        ).fillna(0)
+
+        st.bar_chart(failures_resultado)
 
 
     with col2:
