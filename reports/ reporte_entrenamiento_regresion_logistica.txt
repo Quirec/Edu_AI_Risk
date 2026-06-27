@@ -1,0 +1,43 @@
+REPORTE DE ENTRENAMIENTO - REGRESIÓN LOGÍSTICA
+============================================================
+
+Features utilizadas:
+['G1', 'G2', 'absences', 'studytime', 'failures']
+
+Distribución de clases:
+aprueba
+0    265
+1    130
+Name: count, dtype: int64
+
+Interpretación de clases:
+0 = Aprueba
+1 = Reprueba
+
+Mejores hiperparámetros:
+{'modelo__C': 1, 'modelo__penalty': 'l1', 'modelo__solver': 'liblinear'}
+
+Mejor F1-score en validación cruzada:
+0.8837944664031621
+
+Métricas en conjunto de prueba:
+Accuracy:  0.8861
+F1-score:  0.8364
+Precision: 0.7931
+Recall:    0.8846
+
+Matriz de confusión:
+               Predice Aprueba  Predice Reprueba
+Real Aprueba                47                 6
+Real Reprueba                3                23
+
+Reporte de clasificación:
+              precision    recall  f1-score   support
+
+     Aprueba       0.94      0.89      0.91        53
+    Reprueba       0.79      0.88      0.84        26
+
+    accuracy                           0.89        79
+   macro avg       0.87      0.89      0.87        79
+weighted avg       0.89      0.89      0.89        79
+
