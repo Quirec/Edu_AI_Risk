@@ -11,5 +11,5 @@ Liga de dashboard:
 https://eduairisk-zgdjyjqkpzkepxe3fnuddx.streamlit.app/
 
 Liga de Drive:
-https://drive.google.com/drive/folders/1-jRgmGK_Ii5lRYpLsfEQdi0ZLFkQV5QB?usp=sharing
+https://drive.google.com/drive/folders/1Ob5-UipSKSKDMYF7SZwq3rGfiE7bMfC-?usp=drive
 
