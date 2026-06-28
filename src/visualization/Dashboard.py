@@ -534,90 +534,90 @@ st.altair_chart(chart, use_container_width=True)
 col1, col2 = st.columns(2)
 
 with col1:
-riesgo_studytime = pd.crosstab(
-    df["studytime_label"],
-    df["nivel_riesgo"]
-)
-
-riesgo_studytime = riesgo_studytime.reindex(
-    ["< 2 horas", "2 a 5 horas", "5 a 10 horas", "> 10 horas"]
-).fillna(0)
-
-riesgo_studytime = riesgo_studytime.reindex(
-    columns=["Bajo", "Medio", "Alto"],
-    fill_value=0
-)
-
-riesgo_studytime = riesgo_studytime.reset_index().melt(
-    id_vars="studytime_label",
-    value_vars=["Bajo", "Medio", "Alto"],
-    var_name="Nivel de riesgo",
-    value_name="Cantidad"
-)
-
-chart = (
-    alt.Chart(riesgo_studytime)
-    .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6)
-    .encode(
-        x=alt.X(
-            "studytime_label:N",
-            sort=["< 2 horas", "2 a 5 horas", "5 a 10 horas", "> 10 horas"],
-            title="Tiempo de estudio"
-        ),
-        y=alt.Y("Cantidad:Q", title="Cantidad"),
-        color=alt.Color("Nivel de riesgo:N", scale=colores_riesgo),
-        xOffset="Nivel de riesgo:N",
-        tooltip=["studytime_label", "Nivel de riesgo", "Cantidad"]
+    riesgo_studytime = pd.crosstab(
+        df["studytime_label"],
+        df["nivel_riesgo"]
     )
-    .properties(
-        title="Nivel de riesgo por tiempo de estudio",
-        height=350
-    )
-)
 
-st.altair_chart(chart, use_container_width=True)
+    riesgo_studytime = riesgo_studytime.reindex(
+        ["< 2 horas", "2 a 5 horas", "5 a 10 horas", "> 10 horas"]
+    ).fillna(0)
+
+    riesgo_studytime = riesgo_studytime.reindex(
+        columns=["Bajo", "Medio", "Alto"],
+        fill_value=0
+    )
+
+    riesgo_studytime = riesgo_studytime.reset_index().melt(
+        id_vars="studytime_label",
+        value_vars=["Bajo", "Medio", "Alto"],
+        var_name="Nivel de riesgo",
+        value_name="Cantidad"
+    )
+
+    chart = (
+        alt.Chart(riesgo_studytime)
+        .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6)
+        .encode(
+            x=alt.X(
+                "studytime_label:N",
+                sort=["< 2 horas", "2 a 5 horas", "5 a 10 horas", "> 10 horas"],
+                title="Tiempo de estudio"
+            ),
+            y=alt.Y("Cantidad:Q", title="Cantidad"),
+            color=alt.Color("Nivel de riesgo:N", scale=colores_riesgo),
+            xOffset="Nivel de riesgo:N",
+            tooltip=["studytime_label", "Nivel de riesgo", "Cantidad"]
+        )
+        .properties(
+            title="Nivel de riesgo por tiempo de estudio",
+            height=350
+        )
+    )
+
+    st.altair_chart(chart, use_container_width=True)
 
 with col2:
-top_riesgo = (
-    df.sort_values("probabilidad_reprueba_base", ascending=False)
-    .head(15)
-    .copy()
-)
-
-top_riesgo["Alumno"] = "Alumno " + top_riesgo["alumno_id"].astype(str)
-
-chart = (
-    alt.Chart(top_riesgo)
-    .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6)
-    .encode(
-        x=alt.X("Alumno:N", sort="-y", title="Alumno"),
-        y=alt.Y(
-            "probabilidad_reprueba_pct:Q",
-            title="Probabilidad de reprobar (%)"
-        ),
-        color=alt.Color("nivel_riesgo:N", scale=colores_riesgo),
-        tooltip=[
-            "Alumno",
-            "G1",
-            "G2",
-            "absences",
-            "failures",
-            "studytime_label",
-            "nivel_riesgo",
-            alt.Tooltip("probabilidad_reprueba_pct:Q", format=".1f")
-        ]
+    top_riesgo = (
+        df.sort_values("probabilidad_reprueba_base", ascending=False)
+        .head(15)
+        .copy()
     )
-    .properties(
-        title="Top 15 alumnos con mayor probabilidad de reprobar",
-        height=350
+
+    top_riesgo["Alumno"] = "Alumno " + top_riesgo["alumno_id"].astype(str)
+
+    chart = (
+        alt.Chart(top_riesgo)
+        .mark_bar(cornerRadiusTopLeft=6, cornerRadiusTopRight=6)
+        .encode(
+            x=alt.X("Alumno:N", sort="-y", title="Alumno"),
+            y=alt.Y(
+                "probabilidad_reprueba_pct:Q",
+                title="Probabilidad de reprobar (%)"
+            ),
+            color=alt.Color("nivel_riesgo:N", scale=colores_riesgo),
+            tooltip=[
+                "Alumno",
+                "G1",
+                "G2",
+                "absences",
+                "failures",
+                "studytime_label",
+                "nivel_riesgo",
+                alt.Tooltip("probabilidad_reprueba_pct:Q", format=".1f")
+            ]
+        )
+        .properties(
+            title="Top 15 alumnos con mayor probabilidad de reprobar",
+            height=350
+        )
     )
-)
 
-st.altair_chart(chart, use_container_width=True)
+    st.altair_chart(chart, use_container_width=True)
 
-# =========================
-# Tabla de alumnos prioritarios
-# =========================
+    # =========================
+    # Tabla de alumnos prioritarios
+    # =========================
 
 st.subheader("Alumnos prioritarios para intervención")
 
@@ -660,7 +660,7 @@ st.dataframe(
     alumnos_prioritarios,
     use_container_width=True,
     hide_index=True
-)
+    )
 
 st.markdown("---")
 st.header("Chatbot")
